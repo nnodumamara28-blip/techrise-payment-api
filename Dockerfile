@@ -5,9 +5,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir "pip>=24.3" "setuptools>=78.1.1" "wheel>=0.46.2" && \
-    pip3 install --no-cache-dir -r requirements.txt && \
-    pip3 install --no-cache-dir --upgrade "msgpack>=1.2.1"
+RUN pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir --force-reinstall --upgrade \
+        "setuptools>=78.1.1" "wheel>=0.46.2" "msgpack>=1.2.1"
 COPY --chown=appuser:appuser . .
 RUN chmod 750 /app
 EXPOSE 5000
